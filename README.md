@@ -29,7 +29,7 @@ difference, to explore a range percolation processes:
 
 ![Random field example](figures/random_ex.png)
 
-* [2D sand pack example](examples/sand_pack_example.py), based on [2]
+* [2D sand pack example](examples/sand_pack_example.py), based on [2].
   Graphic below shows pore radius and occupied pores (yellow) after running invasion percolation.
   
 ![Sand pack example](figures/sand_pack_ex.png)
@@ -39,7 +39,7 @@ difference, to explore a range percolation processes:
 
 ![Grid example](figures/grid_ex.png)
 
-* [3D irregular grid example](examples/network_example.py)
+* [3D irregular grid example](examples/network_example.py).
   Graphic below shows occupied pores, colored by iteration number, after running invasion percolation.
 
 ![Network example](figures/network_ex.png)
