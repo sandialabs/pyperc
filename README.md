@@ -24,19 +24,23 @@ The software contains several examples. In the examples, the user can modify inp
 parameters, including the stochastic selection process and density 
 difference, to explore a range percolation processes:
 
-* [2D random porous media example](examples/random_porous_media_example.py), based on [1]
+* [2D random porous media example](examples/random_porous_media_example.py), based on [1]. 
+  Graphic below shows pore radius and occupied pores (yellow) after running invasion percolation.
 
 ![Random field example](figures/random_ex.png)
 
 * [2D sand pack example](examples/sand_pack_example.py), based on [2]
-
+  Graphic below shows pore radius and occupied pores (yellow) after running invasion percolation.
+  
 ![Sand pack example](figures/sand_pack_ex.png)
 
-* [3D regular grid example](examples/grid_example.py), image shows occupied pores, colored by iteration number
+* [3D regular grid example](examples/grid_example.py).
+  Graphic below shows occupied pores, colored by iteration number, after running invasion percolation.
 
 ![Grid example](figures/grid_ex.png)
 
-* [3D irregular grid example](examples/network_example.py), image shows occupied pores, colored by iteration number
+* [3D irregular grid example](examples/network_example.py)
+  Graphic below shows occupied pores, colored by iteration number, after running invasion percolation.
 
 ![Network example](figures/network_ex.png)
 
@@ -74,9 +78,7 @@ Python package dependencies include:
 Testing
 ------------
 Automated testing is run using TravisCI at https://travis-ci.org/sandialabs/pyperc.
-Tests can also be run locally using nosetests::
-  
-	nosetests -v --with-coverage --cover-package=pyperc pyperc
+Tests can also be run locally using nosetests.
 
 Copyright
 ------------
@@ -93,7 +95,7 @@ References
 
 [1] Ewing, R.P. and Berkowitz, B., 1998. A generalized growth model for simulating initial migration of dense non-aqueous phase liquids. Water Resources Research, 34(4), pp.611-622
 
-[2] Glass, R.J., Nicholl, M.J., Rajaram, H. and Andre, B., 2004. Development of slender transport pathways in unsaturated fractured rock: Simulation with modified invasion percolation. Geophysical research letters, 31(6).
+[2] Glass, R.J., Nicholl, M.J., Rajaram, H. and Andre, B., 2004. Development of slender transport pathways in unsaturated fractured rock: Simulation with modified invasion percolation. Geophysical Research Letters, 31(6).
 
 
 ___

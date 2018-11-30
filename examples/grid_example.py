@@ -9,7 +9,7 @@ plt.close('all')
 invading_fluid_density = 1061 # kg/m3, Brine
 defending_fluid_density = 797 # kg/m3, Kerosene
 # Contact angles, one per grain type
-contact_angles = [65] # degress, for the invading fluid
+contact_angles = [65] # degrees, for the invading fluid
 # Surface tension
 surface_tension = 0.05 # N/m
 # Iterations

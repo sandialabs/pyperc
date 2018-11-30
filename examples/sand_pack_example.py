@@ -1,3 +1,8 @@
+"""
+Example based on Glass, R.J., Nicholl, M.J., Rajaram, H. and Andre, B., 2004. 
+Development of slender transport pathways in unsaturated fractured rock: 
+Simulation with modified invasion percolation. Geophysical Research Letters, 31(6).
+"""
 import matplotlib.pylab as plt
 import numpy as np
 import pandas as pd
@@ -9,7 +14,7 @@ plt.close('all')
 invading_fluid_density = 2 # kg/m3, C02
 defending_fluid_density = 996 # kg/m3, Water
 # Contact angles, one per grain type
-contact_angles = [150,150,150] # degress, for the invading fluid on each grain
+contact_angles = [150,150,150] # degrees, for the invading fluid on each grain
 # Surface tension
 surface_tension = 72*0.001 # N/m
 # Iterations

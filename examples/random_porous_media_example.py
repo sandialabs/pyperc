@@ -1,3 +1,8 @@
+"""
+Example based on Ewing, R.P. and Berkowitz, B., 1998. A generalized growth 
+model for simulating initial migration of dense non-aqueous phase liquids.
+ Water Resources Research, 34(4), pp.611-622
+"""
 import matplotlib.pylab as plt
 import numpy as np
 import pandas as pd
@@ -9,7 +14,7 @@ plt.close('all')
 invading_fluid_density = 1400 # kg/m3, C02
 defending_fluid_density = 1000 # kg/m3, Water
 # Contact angles, one per grain type
-contact_angles = [124] # degress, for the invading fluid on each grain
+contact_angles = [124] # degrees, for the invading fluid on each grain
 # Surface tension
 surface_tension = 0.03 # N/m
 # Iterations
