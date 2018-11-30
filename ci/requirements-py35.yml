@@ -1,0 +1,13 @@
+name: test_env
+channels:
+    - defaults
+dependencies:
+    - python=3.5
+    - numpy
+    - networkx
+    - pandas
+    - matplotlib
+    - plotly
+    - nose
+    - pip:
+        - coveralls
