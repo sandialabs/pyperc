@@ -21,7 +21,7 @@ pores along the interface with higher total invading pressure can be filled.
 When p = 1, the selection process along the interface is completely random.
 Note that p < 0, for multi-finger stochastic selection, is not implemented at this time.
 The invasion percolation process continues until the invading fluid reaches 
-a terminal pore or the maximum number of iterations are run.
+a terminal pore or the maximum number of iterations are completed.
 
 Total invading pressure (Pt) at each pore is defined as follows:
 
@@ -56,13 +56,13 @@ is used to complete the following steps:
    desired terminal pores for the invading fluid.  These properties update the pandas 
    DataFrame to include Pc, Pg, Pt, start and end locations for the invading fluid, 
    current occupied pores, and current pores along the invading/defending interface (called neighbors).
-3. Run invasion percolation and specify the maximum number of iterations, 
-   stochastic selection parameter, and random seed.  At each iteration, the occupied and 
-   neighboring pores are updated in the pandas DataFrame.  pyperc also stores results as a pandas
+3. Run invasion percolation and specify the maximum number of iterations and
+   stochastic selection parameter.  At each iteration, the occupied and 
+   neighboring pores are updated in the `pores` pandas DataFrame.  pyperc also stores results as a pandas
    Dataframe (`InvasionPercolation.results`), which contains the pressure threshold 
    and pore number that was filled at each iteration.
    
-Additionally, the software contains a graphics module, `pyperc.graphics` which 
+Additionally, the software contains a graphics module, `pyperc.graphics`, which 
 contains a function to plot 3D pore network models using plotly. matplotlib can 
 be used to create simple 2D graphics using imshow.
 
@@ -109,14 +109,14 @@ Information on installing and using Python can be found at
 https://www.python.org.
 Python distributions, such as Anaconda, are recommended to manage the Python interface.  
 
-The pyperc source files can be obtained by downloading a zip file or using git.  
-The zip file is located at https://github.com/kaklise/pyperc/archive/master.zip
-To use git, run::
+The pyperc source files can be obtained by downloading a zip file or using git.
+The zip file is located at https://github.com/sandialabs/pyperc/archive/master.zip
+To use git, run:
 
 	git clone https://github.com/sandialabs/pyperc
 	
 Once the source files have been obtained (and uncompressed if using the zip file), 
-run the following command from within the main pyperc folder::
+run the following command from within the main pyperc folder:
 
 	python setup.py install
 	
