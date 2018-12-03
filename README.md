@@ -58,7 +58,8 @@ is used to complete the following steps:
    current occupied pores, and current pores along the invading/defending interface (called neighbors).
 3. Run invasion percolation and specify the maximum number of iterations and
    stochastic selection parameter.  At each iteration, the occupied and 
-   neighboring pores are updated in the `pores` pandas DataFrame.  pyperc also stores results as a pandas
+   neighboring pores are updated in the `InvasionPercolation.pores` pandas DataFrame.  
+   pyperc also stores results as a pandas
    Dataframe (`InvasionPercolation.results`), which contains the pressure threshold 
    and pore number that was filled at each iteration.
    
