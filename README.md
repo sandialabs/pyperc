@@ -12,12 +12,12 @@ filled with an invading or defending fluid. The desired terminal pores for the
 invading fluid are also defined, along with fluid-rock properties, including fluid 
 densities, surface tension, and contact angles. Contact angles can vary 
 throughout the pore network model to reflect spatial heterogeneity.
-pyperc then advances the invading fluid by filling a pore along the interface of 
-the invading and defending fluid which has the the lowest total invading pressure. 
+pyperc then advances the invading fluid by filling a pore along the 
+invading/defending fluid interface where the total invading pressure is lowest. 
 A stochastic selection parameter (p, between 0 and 1) adds a random selection 
-process to the model [1]. When p = 0, the pore with the lowest total invading pressure 
-is filled at each iteration (no stochastic selection). As p increases to 1, 
-pores along the interface with higher total invading pressure can be filled.  
+process to the model [1]. When p = 0, the process is deterministic and the pore
+with the lowest total invading pressure is filled at each iteration. As p increases, 
+pores along the interface with higher total invading pressure can be filled. 
 When p = 1, the selection process along the interface is completely random.
 Note that p < 0, for multi-finger stochastic selection, is not implemented at this time.
 The invasion percolation process continues until the invading fluid reaches 
@@ -25,21 +25,20 @@ a terminal pore or the maximum number of iterations are run.
 
 Total invading pressure (Pt) at each pore is defined as follows:
 
-* Pc = 2*gamma*cos(theta)/r
-* Pg = (dd-di)*g*z
-* Pt = Pc + Pg
+Pc = 2*&gamma*cos(&theta)/r  
+Pg = (dd-di)*g*z  
+Pt = Pc + Pg  
 
-where:
-
-* Pc = capillary pressure (Pa)
-* Pg = buoyancy (gravity) pressure (Pa)
-* gamma = surface tension (N/m)
-* theta = invading fluid contact angle (degrees)
-* r = pore radius (m)
-* dd = defending fluid density (kg/m3)
-* di = invading fluid density (kg/m3)
-* g = acceleration due to gravity (-9.8 m/s2)
-* z = distance between the pore and a reference elevation (m)
+where
+   Pc = capillary pressure (Pa)
+   Pg = buoyancy (gravity) pressure (Pa)
+   &gamma = surface tension (N/m)
+   &theta = invading fluid contact angle (degrees)
+   r = pore radius (m)
+   dd = defending fluid density (kg/m3)
+   di = invading fluid density (kg/m3)
+   g = acceleration due to gravity (-9.8 m/s2)
+   z = distance between the pore and a reference elevation (m)
 
 The software contains a single class, `pyperc.model.InvasionPercolation`, which
 is used to complete the following steps:
