@@ -14,9 +14,9 @@ contact_angles = [65] # degrees, for the invading fluid
 surface_tension = 0.05 # N/m
 # Iterations
 max_iterations = -1 # Run to completion
-# Growth model
-p= 0
-seed= 340995
+# Stochastic selection
+p = 0
+
 
 # Get an IP model instance
 ip = pyperc.model.InvasionPercolation()
@@ -29,16 +29,17 @@ cell_size = 0.0005 # 5 mm
 radius_mean = 0.0002 # radius defined using a truncated normal distribution
 radius_std = 0.00005
 radius_min = 0.00001  
-ip.setup_grid(Nx, Ny, Nz, cell_size, (radius_mean, radius_std, radius_min), 0)
+ip.setup_grid(Nx, Ny, Nz, cell_size, (radius_mean, radius_std, radius_min))
 
 # Initialize pores
 ip.initialize_pores(contact_angles, invading_fluid_density, 
                     defending_fluid_density, surface_tension)
 
 # Run invasion percolation
-ip.run(max_iterations,p,seed)
+ip.run(max_iterations, p)
 
-# Plot results
+
+# Generate figures
 N_all = len(ip.pores.radius)
 x_all = np.sort(ip.pores.radius)
 f_all = np.array(range(N_all))/float(N_all)

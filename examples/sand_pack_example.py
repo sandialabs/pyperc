@@ -19,9 +19,9 @@ contact_angles = [150,150,150] # degrees, for the invading fluid on each grain
 surface_tension = 72*0.001 # N/m
 # Iterations
 max_iterations = -1 # Run to completion
-# Growth model
-p = 0.0
-seed = 340995
+# Stochastic selection
+p = 0
+
 
 # Get an IP model instance
 ip = pyperc.model.InvasionPercolation()
@@ -35,8 +35,27 @@ radius = np.loadtxt('data/Sandpack_radius_cm.txt')/100 # sorted by z, then y, th
 grain = np.loadtxt('data/Sandpack_type.txt') # sorted by z, then y, then x
 
 ip.setup_grid(Nx,Ny,Nz,cell_size, radius, grain)
-ip.pores['grain'] = ip.pores['grain'] - 1 # zero based index
+ip.pores['grain'] = ip.pores['grain'] - 1 # change to zero based index
 
+# Initialize pores
+ip.initialize_pores(contact_angles, invading_fluid_density, 
+                    defending_fluid_density, surface_tension)
+
+# Reset start location and update neighbors
+# Circle centered at (116.5, 29.5) with radius 5.5
+# (x-116.5)^2 + (z-29.5)^2 < 5.5^2
+ip.pores.start = 0
+ip.pores.loc[pow(ip.pores.x-116.5*cell_size,2) + 
+             pow(ip.pores.z-29.5*cell_size,2) < 
+             pow(5.5*cell_size,2),'start'] = 1
+ip.pores.occupy = ip.pores.start
+ip.update_neighbors()
+
+# Run invasion percolation
+ip.run(max_iterations, p)
+
+
+# Generate figures
 radius = ip.pores.radius.values.reshape((Nz,Ny,Nx))
 plt.figure()
 plt.imshow(radius[:,0,:], origin='lower')
@@ -49,18 +68,6 @@ plt.figure()
 plt.imshow(grain[:,0,:], origin='lower')
 plt.title('Grain type')
 plt.tight_layout()
-
-# Initialize pores
-ip.initialize_pores(contact_angles, invading_fluid_density, 
-                    defending_fluid_density, surface_tension)
-
-# Reset start location and update neighbors
-# Circle centered at (116.5, 29.5) with radius 5.5
-# (x-116.5)^2 + (z-29.5)^2 < 5.5^2
-ip.pores.start = 0
-ip.pores.loc[pow(ip.pores.x-116.5*cell_size,2) + pow(ip.pores.z-29.5*cell_size,2) < pow(5.5*cell_size,2),'start'] = 1
-ip.pores.occupy = ip.pores.start
-ip.update_neighbors()
 
 start = ip.pores.start.values.reshape((Nz,Ny,Nx))
 plt.figure()
@@ -91,9 +98,6 @@ plt.scatter(ip.pores['radius'], ip.pores['pt'])
 plt.xlabel('Radius (m)')
 plt.ylabel('Total pressure (Pa)')
 
-# Run invasion percolation
-ip.run(max_iterations,p,seed)
-
 # Plot results
 plt.figure()
 plt.plot(ip.results.threshold)
@@ -119,7 +123,7 @@ plt.figure()
 plt.imshow(occupy[:,0,:], origin='lower')
 plt.title('Occupied pores')
 
-iteration = pd.Series(index=ip.pores.index, data=np.nan) #-ip.results.index.max().max()*0.05) 
+iteration = pd.Series(index=ip.pores.index, data=np.nan)
 iteration1 = pd.Series(index = ip.results.node, data = ip.results.index)
 iteration[iteration1.index] = iteration1
 iteration = iteration.values.reshape((Nz,Ny,Nx))

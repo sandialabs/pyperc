@@ -19,9 +19,9 @@ contact_angles = [124] # degrees, for the invading fluid on each grain
 surface_tension = 0.03 # N/m
 # Iterations
 max_iterations = -1 # Run to completion
-# Growth model
-p = 0
-seed = 340995
+# Stochastic selection
+p = 0.2
+
 
 # Get an IP model instance
 ip = pyperc.model.InvasionPercolation()
@@ -60,7 +60,12 @@ ip.pores.loc[(ip.pores.z == max(ip.pores.z)) & \
 ip.pores.loc[ip.pores.z == 0,'end'] = 1
 ip.pores.occupy = ip.pores.start
 ip.update_neighbors()
-     
+    
+# Run invasion percolation
+ip.run(max_iterations, p)
+
+
+# Generate figures
 start = ip.pores.start.values.reshape((Nz,Ny,Nx))
 plt.figure()
 plt.imshow(start[:,0,:], origin='lower')
@@ -96,10 +101,6 @@ plt.scatter(ip.pores['radius'], ip.pores['pt'])
 plt.xlabel('Radius (m)')
 plt.ylabel('Total pressure (Pa)')
 
-# Run invasion percolation
-ip.run(max_iterations,p,seed)
-
-# Plot results
 plt.figure()
 plt.plot(ip.results.threshold)
 plt.xlabel('Iteration')
@@ -124,7 +125,7 @@ plt.figure()
 plt.imshow(occupy[:,0,:], origin='lower')
 plt.title('Occupied pores')
 
-iteration = pd.Series(index=ip.pores.index, data=np.nan) #-ip.results.index.max().max()*0.05) 
+iteration = pd.Series(index=ip.pores.index, data=np.nan)
 iteration1 = pd.Series(index = ip.results.node, data = ip.results.index)
 iteration[iteration1.index] = iteration1
 iteration = iteration.values.reshape((Nz,Ny,Nx))

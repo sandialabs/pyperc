@@ -181,7 +181,7 @@ class InvasionPercolation(object):
         self.pores.pc = (-2.0*self.tension*np.cos(self.pores.angle*np.pi/180))/(self.pores.radius*radius_multiplier)
         self.pores.pt = self.pores.pc + self.pores.pg
 
-    def _set_stochastic_parameters(self, p=0, seed=None):
+    def _set_stochastic_parameters(self, p=0):
         """ 
         Set stochastic parameters
         """  
@@ -262,21 +262,27 @@ class InvasionPercolation(object):
         """
 		Run invasion percolation model
 		
-		Parmaeters
+		Parameters
 		--------------
 		max_iterations : int
 			Maximum number of iteration, -1 = run to completion
 		p : float
-			Stochastic process parameter, between -1 and 1
+			Stochastic process parameter, between 0 and 1
 		seed : int
 			Random seed used in the stochastic process
 		"""
+        if (p > 1) or (p < 0):
+            print('p must be in [0,1]')
+            return
+        
+        np.random.seed(seed)
+        
         facilitation=False # BETA, not fully tested (and slow).
         
         thresh = []
         node = []
         
-        self._set_stochastic_parameters(p, seed)   
+        self._set_stochastic_parameters(p)   
         self.update_neighbors()
         if facilitation: self._update_facilitation()
         
