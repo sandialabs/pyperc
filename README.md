@@ -25,20 +25,20 @@ a terminal pore or the maximum number of iterations are run.
 
 Total invading pressure (Pt) at each pore is defined as follows:
 
-Pc = 2*&gamma*cos(&theta)/r  
-Pg = (dd-di)*g*z  
+Pc = 2ycos(theta)/r  
+Pg = (dd-di)gz  
 Pt = Pc + Pg  
 
 where
-   Pc = capillary pressure (Pa)
-   Pg = buoyancy (gravity) pressure (Pa)
-   &gamma = surface tension (N/m)
-   &theta = invading fluid contact angle (degrees)
-   r = pore radius (m)
-   dd = defending fluid density (kg/m3)
-   di = invading fluid density (kg/m3)
-   g = acceleration due to gravity (-9.8 m/s2)
-   z = distance between the pore and a reference elevation (m)
+* Pc = capillary pressure (Pa)
+* Pg = buoyancy (gravity) pressure (Pa)
+* y = surface tension (N/m)
+* theta = invading fluid contact angle (degrees)
+* r = pore radius (m)
+* dd = defending fluid density (kg/m3)
+* di = invading fluid density (kg/m3)
+* g = acceleration due to gravity (-9.8 m/s2)
+* z = distance between the pore and a reference elevation (m)
 
 The software contains a single class, `pyperc.model.InvasionPercolation`, which
 is used to complete the following steps:
