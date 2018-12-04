@@ -2,7 +2,7 @@ pyperc
 =======================================
 
 pyperc is a Python package for invasion percolation which models multiphase 
-fluid migration in porous media.  Invasion percolation and  
+fluid migration in porous media.  Invasion percolation and 
 modified invasion percolation account for capillary pressure 
 and buoyancy to sequentially fill pores along an interface between
 an invading and defending fluid [e.g. 1,2,3,4].  A tuning parameter can be 
