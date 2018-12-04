@@ -2,10 +2,11 @@ pyperc
 =======================================
 
 pyperc is a Python package for invasion percolation which models multiphase 
-fluid migration in porous media.  The model accounts for capillary pressure 
+fluid migration in porous media.  Invasion percolation and  
+modified invasion percolation account for capillary pressure 
 and buoyancy to sequentially fill pores along an interface between
-an invading and defending fluid.  A tuning parameter can be 
-set to adjust the stochastic nature of the process.  Model equations are from [1,2]. 
+an invading and defending fluid [e.g. 1,2,3,4].  A tuning parameter can be 
+set to adjust the stochastic nature of the process [3]. 
 
 To use pyperc, a pore network model is defined and each pore is initially 
 filled with an invading or defending fluid. The desired terminal pores for the 
@@ -15,7 +16,7 @@ throughout the pore network model to reflect spatial heterogeneity.
 pyperc then advances the invading fluid by filling a pore along the 
 invading/defending fluid interface where the total invading pressure is lowest. 
 A stochastic selection parameter (p, between 0 and 1) adds a random selection 
-process to the model [1]. When p = 0, the process is deterministic and the pore
+process to the model [3]. When p = 0, the process is deterministic and the pore
 with the lowest total invading pressure is filled at each iteration. As p increases, 
 pores along the interface with higher total invading pressure can be filled. 
 When p = 1, the selection process along the interface is completely random.
@@ -23,20 +24,20 @@ Note that p < 0, for multi-finger stochastic selection, is not implemented at th
 The invasion percolation process continues until the invading fluid reaches 
 a terminal pore or the maximum number of iterations are completed.
 
-Total invading pressure (Pt) at each pore is defined as follows:
+Total invading pressure (P<sub>t</sub>) at each pore is defined as follows:
 
-Pc = 2ycos(theta)/r  
-Pg = (dd-di)gz  
-Pt = Pc + Pg  
+P<sub>c</sub> = 2&gamma;cos(&theta;)/r  
+P<sub>g</sub> = (&rho;<sub>d</sub>-&rho;<sub>i</sub>)gz  
+P<sub>t</sub> = P<sub>c</sub> + P<sub>g</sub>  
 
 where
-* Pc = capillary pressure (Pa)
-* Pg = buoyancy (gravity) pressure (Pa)
-* y = surface tension (N/m)
-* theta = invading fluid contact angle (degrees)
+* P<sub>c</sub> = capillary pressure (Pa)
+* P<sub>g</sub> = buoyancy (gravity) pressure (Pa)
+* &gamma; = surface tension (N/m)
+* &theta; = invading fluid contact angle (degrees)
 * r = pore radius (m)
-* dd = defending fluid density (kg/m3)
-* di = invading fluid density (kg/m3)
+* &rho;<sub>d</sub> = defending fluid density (kg/m3)
+* &rho;<sub>i</sub> = invading fluid density (kg/m3)
 * g = acceleration due to gravity (-9.8 m/s2)
 * z = distance between the pore and a reference elevation (m)
 
@@ -54,7 +55,7 @@ is used to complete the following steps:
    defending fluid density, and surface tension. The user can also specify 
    the initial condition (invading or defending fluid) for each pore and the 
    desired terminal pores for the invading fluid.  These properties update the pandas 
-   DataFrame to include Pc, Pg, Pt, start and end locations for the invading fluid, 
+   DataFrame to include P<sub>c</sub>, P<sub>g</sub>, P<sub>t</sub>, start and end locations for the invading fluid, 
    current occupied pores, and current pores along the invading/defending interface (called neighbors).
 3. Run invasion percolation and specify the maximum number of iterations and
    stochastic selection parameter.  At each iteration, the occupied and 
@@ -73,12 +74,12 @@ The software contains several examples. In the examples, the user can modify inp
 parameters, including the stochastic selection process and density 
 difference, to explore a range percolation processes:
 
-* [2D random porous media example](examples/random_porous_media_example.py), based on [1]. 
+* [2D random porous media example](examples/random_porous_media_example.py), based on [3]. 
   Graphic below shows pore radius and occupied pores (yellow) based on invasion percolation using p = 0 and p = 0.2.
 
 ![Random field example](figures/random_ex.png)
 
-* [2D sand pack example](examples/sand_pack_example.py), based on [2].
+* [2D sand pack example](examples/sand_pack_example.py), based on [4].
   Graphic below shows grain type, pore radius, and occupied pores (yellow) based on invasion percolation.
   
 ![Sand pack example](figures/sand_pack_ex.png)
@@ -147,11 +148,13 @@ License
 References
 ------------
 
-[1] Ewing, R.P. and Berkowitz, B., 1998. A generalized growth model for simulating initial migration of dense non-aqueous phase liquids. Water Resources Research, 34(4), pp.611-622
+[1] Chandler, R., Koplik, J., Lerman, K. and Willemsen, J.F., 1982. Capillary displacement and percolation in porous media. J. Fluid Mech., 119, 249-267
 
-[2] Glass, R.J., Nicholl, M.J., Rajaram, H. and Andre, B., 2004. Development of slender transport pathways in unsaturated fractured rock: Simulation with modified invasion percolation. Geophysical Research Letters, 31(6).
+[2] Blunt, M.J. and Scher, H., 1995. Pore-level modeling of wetting. Phys. Rev. E 52, 6387-6403
 
+[3] Ewing, R.P. and Berkowitz, B., 1998. A generalized growth model for simulating initial migration of dense non-aqueous phase liquids. Water Resour. Res., 34(4), 611-622
 
+[4] Glass, R. and Yarrington, L., 2003. Mechanistic modeling of fingering, nonmonotonicity, fragmentation, and pulsation within gravity/buoyant destabilized two-phase/unsaturated flow. Water Resour. Res., 39(3), 1058
 ___
 Sandia National Laboratories is a multimission laboratory managed and operated by National Technology and 
 Engineering Solutions of Sandia, LLC., a wholly owned subsidiary of Honeywell International, Inc., for the 
